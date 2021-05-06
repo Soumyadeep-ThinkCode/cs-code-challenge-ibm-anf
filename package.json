@@ -1,0 +1,15 @@
+{
+  "name": "cs-code-challenge_ibm",
+  "version": "1.0.0",
+  "description": "IBM Challenge for ANF",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "IBM",
+    "ANF"
+  ],
+  "author": "Soumyadeep Ghosh",
+  "license": "ISC"
+}

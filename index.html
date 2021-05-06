@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>IBM ANF CS Challenge | Solution 1</title>
+        <meta charset="utf-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1"/>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+        <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet'/>
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.7.7/handlebars.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    </head>
+    <body>
+        <div class="container" style="font-family: Roboto;">
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div style="font-size: 4rem; font-weight: 800; line-height: 1.2; margin-top : 5vh;">View complete user list</div>
+                    <div style="font-size: 1.5rem; line-height: 1.2; font-weight: 300; color: darkgray; margin-bottom: 6vh;">The complete set of users fetched from the ANF API have been listed below for reference.</div>
+
+                    <div id="user-list"></div>      
+                </div>
+            </div>
+        </div>
+
+        <script id="user-template" type="text/x-handlebars-template">
+            <table class="table table-hover table-striped table-bordered">
+                <thead>
+                    <tr style="background: thistle;">
+                        <th style="text-align: center;">User ID</th>
+                        <th style="text-align: center;">User Avatar</th>
+                        <th style="text-align: center;">Full Name</th>
+                        <th style="text-align: center;">Profile Created On</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {{#this}}
+                        <tr>
+                            <td style="text-align: center;">{{id}}</td>
+                            <td style="text-align: center;"><img src="{{avatar}}" alt="User Picture" style="border-radius: 50%; height : 2rem; width : 2rem;"/></td>
+                            <td style="text-align: center; font-size: 1.6rem; font-weight: bold;">{{name}}</td>
+                            <td style="text-align: center; font-style: italic; color: darkgray;">{{createdAt}}</td>
+                        </tr>
+                    {{/this}}
+                </tbody>
+            </table>
+        </script>
+
+        <script type="text/javascript">
+            const getData = () => {
+                jQuery.ajax({
+                    type : 'GET',
+                    url : 'https://5dc588200bbd050014fb8ae1.mockapi.io/assessment',
+                    success : function(data){
+                        var user_tag   = jQuery("#user-template").html();
+                        var user_template = Handlebars.compile(user_tag);
+                        jQuery("#user-list").html(user_template(data));
+                    }
+                });
+            }
+
+            window.onload = getData;
+        </script>
+    </body>
+</html>
